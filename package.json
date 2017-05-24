@@ -1,0 +1,27 @@
+{
+  "name": "react-native-lite-qrcode",
+  "version": "0.0.1",
+  "description": "QRComponent implement with art for react native.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "react-mixin": "latest"
+  },
+  "keywords": [
+    "react-native",
+    "QRCode",
+    "ART"
+  ],
+  "author": "程巍巍",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/LittoCats/react-native-lite-qrcode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LittoCats/react-native-lite-qrcode/issues"
+  },
+  "homepage": "https://github.com/LittoCats/react-native-lite-qrcode#readme"
+}
