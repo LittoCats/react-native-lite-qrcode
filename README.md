@@ -19,5 +19,14 @@ static defaultProps = {
 };
 ```
 
+```
+class QRPath {
+  d: ART.Path;
+  dim: number;
+  constructor(msg: string = '', level: QRCode.Level = 'M', reverse: bool = false);
+}
+
+
+```
 
 

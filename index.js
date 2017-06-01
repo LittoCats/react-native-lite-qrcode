@@ -53,39 +53,13 @@ export default class QRCode extends Component {
   _updateQRModule() {
     const QRModel = encode(this.props.source, this.props.level);
     const reverse = this.props.reverse;
+    const {d, dim} = new QRPath(this.props.source, this.props.level, reverse);
 
-    const path = new Path();
-    const max = QRModel.modules.length-1;
-    QRModel.modules.forEach(function (modules, row) {
-      var x = 0, y = row+0.5;
-      path.moveTo(0, y);
-      modules.reduce(function (previous, current, index) {
-
-        if (reverse){
-          previous != previous;
-          current != current;
-        }
-
-        if (!previous && current){
-          x = index;
-          path.moveTo(x, y)
-        }
-
-        if ((current && index === max) || (previous && (!current || index === max))){
-          if (current) index += 1;
-          var e = index;
-          path.lineTo(index, y);
-        }
-
-        return current;
-      })
-    });
-
-    path.renderSize = QRModel.modules.length;
+    d.renderSize = QRModel.modules.length;
 
     this.setState({
       ... this.state,
-      path
+      path: d
     });
   }
 
@@ -139,6 +113,44 @@ class QRCodeImpl extends Component {
     );
   }
 }
+
+class QRPath {
+  constructor(src = '', level = 'M', reverse = false) {
+    const QRModel = encode(src, level);
+    const path = new Path();
+    const max = QRModel.modules.length-1;
+
+    QRModel.modules.forEach(function (modules, row) {
+      var x = 0, y = row+0.5;
+      path.moveTo(0, y);
+      modules.reduce(function (previous, current, index) {
+
+        if (reverse){
+          previous != previous;
+          current != current;
+        }
+
+        if (!previous && current){
+          x = index;
+          path.moveTo(x, y)
+        }
+
+        if ((current && index === max) || (previous && (!current || index === max))){
+          if (current) index += 1;
+          var e = index;
+          path.lineTo(index, y);
+        }
+
+        return current;
+      })
+    });
+
+    this.dim = max+1;
+    this.d = path;
+  }
+}
+
+export {QRPath};
 
 const styles = StyleSheet.create({
   surface: {
